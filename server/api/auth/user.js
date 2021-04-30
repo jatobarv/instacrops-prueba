@@ -1,24 +1,26 @@
 const { firebase } = require("../../fbConfig");
 
+let user = null;
+
 exports.login = (req, res) => {
   firebase
     .auth()
     .signInWithEmailAndPassword(req.body.email, req.body.password)
-    .then(function () {
+    .then(() => {
       firebase
         .auth()
         .currentUser.getIdToken(true)
-        .then(function (idToken) {
-          res.send({ idToken, email: req.body.email });
+        .then((idToken) => {
+          user = { idToken, email: req.body.email };
+          res.send(user);
+          console.log(req);
           res.end();
         })
-        .catch(function (error) {
-          //Handle error
+        .catch((error) => {
           console.log(error);
         });
     })
-    .catch(function (error) {
-      //Handle error
+    .catch((error) => {
       res
         .status(401)
         .json({ message: `Usuario o contraseña erronea. Intente nuevamente` });
@@ -34,9 +36,7 @@ exports.logout = (req, res) => {
       res.send(null);
       res.end();
     })
-    .catch(function (error) {
-      //Handle error
-    });
+    .catch((error) => {});
 };
 
 exports.isAuth = (req, res) => {
@@ -44,15 +44,14 @@ exports.isAuth = (req, res) => {
   if (user) {
     user
       .getIdToken(true)
-      .then(function (idToken) {
+      .then((idToken) => {
         res.send(idToken);
         res.end();
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   } else {
-    //Handle error
-    res.status(200).json({ message: `No hay usuario en sesión` });
+    res.status(403).json({ message: `No hay usuario en sesión` });
   }
 };

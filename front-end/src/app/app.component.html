@@ -2,7 +2,9 @@
   <h2>Sign in</h2>
   <input type="text" #email />
   <input type="password" #password />
-  <button (click)="onSignIn(email.value, password.value)">sign in</button>
+  <button (click)="onSignIn(email.value + '@a.com', password.value)">
+    sign in
+  </button>
 </div>
 
 <app-home *ngIf="isSignedIn" (isLogout)="handleLogOut()"></app-home>

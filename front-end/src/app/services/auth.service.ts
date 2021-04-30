@@ -17,6 +17,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     return this.http.get('http://localhost:8080/logout/');
   }
 }

@@ -12,15 +12,17 @@ export class AppComponent {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    if (localStorage.getItem('token') !== null) this.isSignedIn = true;
-    else this.isSignedIn = false;
+    if (localStorage.getItem('token') !== null) {
+      this.isSignedIn = true;
+    } else this.isSignedIn = false;
   }
 
   async onSignIn(email: string, password: string) {
     (await this.authService.signin(email, password)).subscribe(
-      (a: any) => {
+      (user: any) => {
         this.isSignedIn = true;
-        localStorage.setItem('token', a.idToken);
+        localStorage.setItem('token', user.idToken);
+        localStorage.setItem('user', user.email.split('@')[0]);
       },
       (error) => {
         if (error.status === 401) {

@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   exports: [HomeComponent],
   providers: [AuthService],
   bootstrap: [AppComponent],
