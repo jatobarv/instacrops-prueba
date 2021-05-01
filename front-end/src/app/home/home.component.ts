@@ -35,10 +35,13 @@ export class HomeComponent implements OnInit {
   }
 
   async getItems() {
-    await (await this.itemsService.getItems()).subscribe((items) => {
-      this.items = items;
-      console.log(this.items);
-    });
+    await (await this.itemsService.getItems()).subscribe(
+      (items) => {
+        this.items = items;
+        console.log(this.items);
+      },
+      (error) => console.log(error)
+    );
   }
 
   logout() {

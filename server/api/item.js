@@ -32,10 +32,9 @@ exports.oneItem = async (req, res) => {
       console.log({
         message: `Error simulado`,
       });
-      res.status(404);
+      res.status(500);
       return this.oneItem(req, res);
     }
-
     const data = await response.json();
     client.setex(`items_${itemId}`, 120, JSON.stringify(data));
     res.status(200).send(data);

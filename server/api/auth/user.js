@@ -13,7 +13,6 @@ exports.login = (req, res) => {
         .then((idToken) => {
           user = { idToken, email: req.body.email };
           res.send(user);
-          console.log(req);
           res.end();
         })
         .catch((error) => {

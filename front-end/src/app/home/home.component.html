@@ -1,19 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Instacrops</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link">{{ username }}</a>
       </li>
@@ -25,17 +14,29 @@
     </ul>
   </div>
 </nav>
-<ul>
-  <li *ngFor="let item of items; index as i">
-    <h3>{{ item.name }}</h3>
+
+<div class="d-flex align-content-start flex-wrap justify-content-center m-4">
+  <div
+    class="card m-2"
+    style="width: 18rem"
+    *ngFor="let item of items; index as i"
+  >
+    <div class="card-body">
+      <h5 class="card-title">{{ item.name }}</h5>
+      <p class="card-text">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis,
+        aliquam.
+      </p>
+    </div>
     <button
-      class="btn btn-lg btn-outline-primary"
+      class="btn btn-lg btn-outline-primary mx-auto mb-3"
       (click)="open(content, item.id)"
     >
       Ver item
     </button>
-  </li>
-</ul>
+  </div>
+</div>
+
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">
@@ -51,22 +52,28 @@
     </button>
   </div>
   <div class="modal-body">
-    <h5>Nombre: {{ selectedItem.name }}</h5>
-    <h5>ID de usuario: {{ selectedItem.user_id }}</h5>
+    <div class="media">
+      <img
+        class="mr-3"
+        src="http://semantic-ui.com/images/wireframe/image.png"
+        alt="Generic placeholder image"
+        style="width: 125px"
+      />
+      <div class="media-body">
+        <h5>Nombre: {{ selectedItem.name }}</h5>
+        <h5>ID de usuario: {{ selectedItem.user_id }}</h5>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum,
+        exercitationem?
+      </div>
+    </div>
   </div>
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-outline-dark"
+      class="btn btn-outline-primary"
       (click)="modal.close('Botón cerrar')"
     >
       Cerrar
     </button>
   </div>
 </ng-template>
-
-<hr />
-
-<pre>{{ closeResult }}</pre>
-
-<button (click)="logout()">log out</button>
