@@ -1,7 +1,19 @@
 const fetch = require("node-fetch");
-const redis = require("redis");
-const redis_port = 6379;
-const client = redis.createClient(redis_port);
+const Redis = require("ioredis");
+("redis://:pc31259a3130264fe60d7bcec7fec92bb4ed1795f8717a166f1febfd612a0c6f6@ec2-54-198-16-203.compute-1.amazonaws.com:11840");
+const client = new Redis(
+  {
+    host: "ec2-54-198-16-203.compute-1.amazonaws.com",
+    port: 11840,
+    password:
+      "pc31259a3130264fe60d7bcec7fec92bb4ed1795f8717a166f1febfd612a0c6f6",
+  },
+  {
+    tls: {
+      rejectUnauthorized: false,
+    },
+  }
+);
 
 exports.items = async (req, res) => {
   try {
@@ -9,6 +21,7 @@ exports.items = async (req, res) => {
       `https://my-json-server.typicode.com/jirann/FAKEJSON/items`
     );
     const data = await response.json();
+    console.log(data);
     client.setex("items", 120, JSON.stringify(data));
     res.send(data);
   } catch (error) {
@@ -37,6 +50,7 @@ exports.oneItem = async (req, res) => {
     }
     const data = await response.json();
     client.setex(`items_${itemId}`, 120, JSON.stringify(data));
+    console.log(data);
     res.status(200).send(data);
   } catch (error) {
     console.log(error);

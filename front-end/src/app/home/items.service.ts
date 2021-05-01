@@ -8,10 +8,12 @@ export class ItemsService {
   constructor(private http: HttpClient) {}
 
   async getItems() {
-    return this.http.get('http://localhost:8080/items/');
+    return this.http.get('https://instacrops-test.herokuapp.com/items/');
   }
 
   async getItemById(itemId: string) {
-    return this.http.get('http://localhost:8080/items/' + itemId);
+    return this.http.get(
+      'https://instacrops-test.herokuapp.com/items/' + itemId
+    );
   }
 }

@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   async signin(email: string, password: string) {
-    return this.http.post('http://localhost:8080/login/', {
+    return this.http.post('https://instacrops-test.herokuapp.com/login/', {
       email: email,
       password: password,
     });
@@ -18,6 +18,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    return this.http.get('http://localhost:8080/logout/');
+    return this.http.get('https://instacrops-test.herokuapp.com/logout/');
   }
 }
